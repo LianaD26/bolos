@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class ElementoJuego(ABC):
+class Frame(ABC):
     def __init__(self):
         super().__init__()
 
@@ -8,7 +8,7 @@ class ElementoJuego(ABC):
     def puntaje(self):
         pass
 
-class Juego(ElementoJuego):
+class Juego(Frame):
     def __init__(self):
         super().__init__()
         self.fichas = []
@@ -19,7 +19,7 @@ class Juego(ElementoJuego):
             total += ficha.puntaje()
         return total
 
-class Ficha(ElementoJuego):
+class Ficha(Frame):
     def __init__(self):
         super().__init__()
         self.tiros = []
@@ -50,7 +50,7 @@ class Ficha(ElementoJuego):
             return self
         return None
 
-class Tiro(ElementoJuego):
+class Tiro(Frame):
     def __init__(self, bolos):
         super().__init__()
         self.bolos = bolos
