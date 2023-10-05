@@ -1,38 +1,38 @@
-class Game:
-    def _init_(self):
-        self.frames = []  # frames
+class Juego:
+    def __init__(self):
+        self.fichas = []  # fichas
 
-    def score(self):   # puntaje
+    def puntaje(self):   # puntaje
         total = 0
-        for frame in self.frames:
-            total += frame.score()
+        for ficha in self.fichas:
+            total += ficha.puntaje()
         return total
 
 
-class Frame:
-    def _init_(self):
-        self.rolls = []
+class Ficha:
+    def __init__(self):
+        self.tiros = []
 
-    def add_roll(self, pins):
-        self.rolls.append(Roll(pins))
+    def agregar_tiro(self, bolos):
+        self.tiros.append(Tiro(bolos))
 
-    def score(self):
+    def puntaje(self):
         total = 0
-        for roll in self.rolls:
-            total += roll.score()
-        # Si el frame es un spare, se suma el puntaje del primer roll del siguiente frame
-        if self.is_spare():
-            next_frame = self.frames[self.frames.index(self) + 1]
-            total += next_frame.rolls[0].score()
+        for tiro in self.tiros:
+            total += tiro.puntaje()
+
+        if self.es_spare(): # Si la ficha is_spare, se suma el puntaje del primer tiro de la siguiente ficha
+            siguiente_ficha = self.fichas[self.fichas.index(self) + 1]
+            total += siguiente_ficha.tiros[0].puntaje()
         return total
 
-    def is_spare(self):
-        return len(self.rolls) == 2 and self.score() == 10
+    def es_spare(self):
+        return len(self.tiros) == 2 and self.puntaje() == 10
 
 
-class Roll:
-    def _init_(self, pins):
-        self.pins = pins
+class Tiro:
+    def __init__(self, bolos):
+        self.bolos = bolos
 
-    def score(self):
-        return self.pins
+    def puntaje(self):
+        return self.bolos
